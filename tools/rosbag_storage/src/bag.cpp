@@ -340,7 +340,7 @@ void Bag::writeFileHeaderRecord() {
     chunk_count_      = chunks_.size();
 
     CONSOLE_BRIDGE_logDebug("Writing FILE_HEADER [%llu]: index_pos=%llu connection_count=%d chunk_count=%d",
-                            (unsigned long long) file_.getOffset(), (unsigned long long) index_data_pos_, connection_count_, chunk_count_);
+              (unsigned long long) file_.getOffset(), (unsigned long long) index_data_pos_, connection_count_, chunk_count_);
     
     // Write file header record
     M_string header;
@@ -391,7 +391,7 @@ void Bag::readFileHeaderRecord() {
     }
 
     CONSOLE_BRIDGE_logDebug("Read FILE_HEADER: index_pos=%llu connection_count=%d chunk_count=%d",
-                            (unsigned long long) index_data_pos_, connection_count_, chunk_count_);
+              (unsigned long long) index_data_pos_, connection_count_, chunk_count_);
 
     // Skip the data section (just padding)
     seek(data_size, std::ios::cur);
@@ -461,7 +461,7 @@ void Bag::writeChunkHeader(CompressionType compression, uint32_t compressed_size
     chunk_header.uncompressed_size = uncompressed_size;
 
     CONSOLE_BRIDGE_logDebug("Writing CHUNK [%llu]: compression=%s compressed=%d uncompressed=%d",
-                            (unsigned long long) file_.getOffset(), chunk_header.compression.c_str(), chunk_header.compressed_size, chunk_header.uncompressed_size);
+              (unsigned long long) file_.getOffset(), chunk_header.compression.c_str(), chunk_header.compressed_size, chunk_header.uncompressed_size);
 
     M_string header;
     header[OP_FIELD_NAME]          = toHeaderString(&OP_CHUNK);
@@ -640,7 +640,7 @@ void Bag::writeConnectionRecords() {
 
 void Bag::writeConnectionRecord(ConnectionInfo const* connection_info) {
     CONSOLE_BRIDGE_logDebug("Writing CONNECTION [%llu:%d]: topic=%s id=%d",
-                            (unsigned long long) file_.getOffset(), getChunkOffset(), connection_info->topic.c_str(), connection_info->id);
+              (unsigned long long) file_.getOffset(), getChunkOffset(), connection_info->topic.c_str(), connection_info->id);
 
     M_string header;
     header[OP_FIELD_NAME]         = toHeaderString(&OP_CONNECTION);
@@ -829,7 +829,7 @@ void Bag::decompressLz4Chunk(ChunkHeader const& chunk_header) const {
     CompressionType compression = compression::LZ4;
 
     CONSOLE_BRIDGE_logDebug("lz4 compressed_size: %d uncompressed_size: %d",
-                            chunk_header.compressed_size, chunk_header.uncompressed_size);
+             chunk_header.compressed_size, chunk_header.uncompressed_size);
 
     chunk_buffer_.setSize(chunk_header.compressed_size);
     file_.read((char*) chunk_buffer_.getData(), chunk_header.compressed_size);
@@ -890,9 +890,9 @@ void Bag::writeChunkInfoRecords() {
         header[COUNT_FIELD_NAME]      = toHeaderString(&chunk_connection_count);
 
         CONSOLE_BRIDGE_logDebug("Writing CHUNK_INFO [%llu]: ver=%d pos=%llu start=%d.%d end=%d.%d",
-                                (unsigned long long) file_.getOffset(), CHUNK_INFO_VERSION, (unsigned long long) chunk_info.pos,
-                                chunk_info.start_time.sec, chunk_info.start_time.nsec,
-                                chunk_info.end_time.sec, chunk_info.end_time.nsec);
+                  (unsigned long long) file_.getOffset(), CHUNK_INFO_VERSION, (unsigned long long) chunk_info.pos,
+                  chunk_info.start_time.sec, chunk_info.start_time.nsec,
+                  chunk_info.end_time.sec, chunk_info.end_time.nsec);
 
         writeHeader(header);
 
@@ -936,9 +936,9 @@ void Bag::readChunkInfoRecord() {
     readField(fields, COUNT_FIELD_NAME,      true, &chunk_connection_count);
 
     CONSOLE_BRIDGE_logDebug("Read CHUNK_INFO: chunk_pos=%llu connection_count=%d start=%d.%d end=%d.%d",
-                            (unsigned long long) chunk_info.pos, chunk_connection_count,
-                            chunk_info.start_time.sec, chunk_info.start_time.nsec,
-                            chunk_info.end_time.sec, chunk_info.end_time.nsec);
+              (unsigned long long) chunk_info.pos, chunk_connection_count,
+              chunk_info.start_time.sec, chunk_info.start_time.nsec,
+              chunk_info.end_time.sec, chunk_info.end_time.nsec);
 
     // Read the topic count entries
     for (uint32_t i = 0; i < chunk_connection_count; i ++) {
