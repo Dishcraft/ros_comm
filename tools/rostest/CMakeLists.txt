@@ -19,7 +19,8 @@ install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h")
 
-if(CATKIN_ENABLE_TESTING)
+#if(CATKIN_ENABLE_TESTING)
+if (0)
   find_package(catkin COMPONENTS rostest)
 
   catkin_add_gtest(test_permuter test/test_permuter.cpp)

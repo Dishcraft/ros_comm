@@ -8,7 +8,8 @@ catkin_python_setup()
 catkin_install_python(PROGRAMS scripts/rostopic
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-if(CATKIN_ENABLE_TESTING)
+#if(CATKIN_ENABLE_TESTING)
+if(0)
   find_package(rostest)
   add_rostest(test/rostopic.test)
   #add_rostest(test/rostopic2.test)

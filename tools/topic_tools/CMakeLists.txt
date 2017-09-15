@@ -79,7 +79,8 @@ catkin_install_python(PROGRAMS
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 #Testing
-if(CATKIN_ENABLE_TESTING)
+#if(CATKIN_ENABLE_TESTING)
+if(0)
   find_package(rostest)
   find_package(rosunit)
   catkin_add_gtest(${PROJECT_NAME}-utest test/utest.cpp)

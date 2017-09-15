@@ -107,7 +107,8 @@ install(DIRECTORY include/
   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h")
 
-if(CATKIN_ENABLE_TESTING)
+#if(CATKIN_ENABLE_TESTING)
+if(0)
   catkin_add_gtest(${PROJECT_NAME}-utest test/utest.cpp)
   if(TARGET ${PROJECT_NAME}-utest)
     target_link_libraries(${PROJECT_NAME}-utest ${PROJECT_NAME})

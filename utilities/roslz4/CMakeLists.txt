@@ -66,7 +66,8 @@ install(DIRECTORY include/${PROJECT_NAME}
 )
 
 # Testing
-if (CATKIN_ENABLE_TESTING)
+#if(CATKIN_ENABLE_TESTING)
+if(0)
   catkin_add_gtest(test_roslz4 test/roslz4_test.cpp)
   if (TARGET test_roslz4)
     target_link_libraries(test_roslz4 roslz4 ${catkin_LIBRARIES} pthread)
